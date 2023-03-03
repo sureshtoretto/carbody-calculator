@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>COE Calculator</title>
+    <style>
+      /* Styles for the form */
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      input[type="number"] {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0062cc;
+      }
+      .result {
+        margin-top: 20px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>COE Calculator</h1>
+    <form id="coe-form">
+      <label for="arf-value">ARF Value:</label>
+      <input type="number" id="arf-value" name="arf-value" required>
+      <label for="lowest-depreciation">Lowest Depreciation:</label>
+      <input type="number" id="lowest-depreciation" name="lowest-depreciation" required>
+      <label for="num-months-coe">Number of Months COE:</label>
+      <input type="number" id="num-months-coe" name="num-months-coe" required>
+      <button type="submit">Calculate COE</button>
+    </form>
+    <div id="result-container" class="result"></div>
+    <script>
+      // Function to calculate COE
+      function calculateCOE(arfValue, lowestDepreciation, numMonthsCOE) {
+        return arfValue / 2 + lowestDepreciation / 12 * numMonthsCOE;
+      }
+      
+      // Handle form submission
+      document.getElementById("coe-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const arfValue = parseFloat(document.getElementById("arf-value").value);
+        const lowestDepreciation = parseFloat(document.getElementById("lowest-depreciation").value);
+        const numMonthsCOE = parseFloat(document.getElementById("num-months-coe").value);
+        const result = calculateCOE(arfValue, lowestDepreciation, numMonthsCOE);
+        document.getElementById("result-container").textContent = `The COE is $${result.toFixed(2)}`;
+      });
+    </script>
+  </body>
+</html>
